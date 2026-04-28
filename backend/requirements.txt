@@ -5,3 +5,6 @@ gunicorn
 whitenoise
 python-dotenv
 pymongo
+pandas
+numpy
+scikit-learn
