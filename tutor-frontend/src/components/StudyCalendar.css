@@ -1,0 +1,202 @@
+/* ─── StudyCalendar.css ─── */
+
+.study-calendar-wrapper {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-top: 24px;
+  font-family: inherit;
+}
+
+/* Header */
+.calendar-header { margin-bottom: 20px; }
+.calendar-title-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.calendar-title-row h2 { font-size: 1.4rem; font-weight: 700; color: #1e293b; margin: 0; }
+.calendar-subtitle { color: #64748b; font-size: 0.9rem; margin: 0; }
+
+/* Form */
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 0.85rem; font-weight: 600; color: #374151; }
+
+.form-input,
+.form-select {
+  padding: 9px 12px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #ffffff;
+  color: #111827;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+.form-input::placeholder { color: #9ca3af; }
+
+/* Primary button */
+.btn-primary {
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
+  color: #ffffff;
+  border: none;
+  padding: 11px 26px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+}
+.btn-primary:disabled { opacity: 0.65; cursor: not-allowed; }
+
+/* Regenerate button */
+.regenerate-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 9px 14px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #475569;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.regenerate-btn:hover { background: #f1f5f9; border-color: #94a3b8; }
+
+/* Loading spin */
+.regenerate-icon { animation: spin 1.5s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Result: header, motivational bar ─── */
+.result-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 20px;
+  flex-wrap: wrap; gap: 12px;
+}
+
+.motivational-msg {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 14px 18px;
+  border-radius: 10px;
+  color: #166534;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ─── Timeline ─── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: #e2e8f0;
+  z-index: 0;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  position: relative;
+  animation: slideIn 0.35s ease forwards;
+  opacity: 0;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.timeline-dot {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 3px solid #4f46e5;
+  background: #fff;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  margin-top: 22px;
+  left: 13px;
+}
+
+.timeline-card {
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: box-shadow 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.timeline-card:hover { box-shadow: 0 6px 16px rgba(0,0,0,0.07); transform: translateY(-1px); }
+.timeline-card.done { opacity: 0.5; }
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-badge {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 0.82rem; font-weight: 700;
+  color: #475569;
+  background: #f1f5f9;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.chapter-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.task-description {
+  display: flex; align-items: flex-start; gap: 6px;
+  font-size: 0.88rem;
+  color: #334155;
+  background: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 8px;
+  line-height: 1.5;
+}
+
+.checkbox-wrapper {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.85rem; font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+}
+.checkbox-wrapper input { width: 16px; height: 16px; accent-color: #16a34a; cursor: pointer; }

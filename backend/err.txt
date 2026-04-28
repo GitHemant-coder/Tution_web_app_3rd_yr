@@ -1,0 +1,35 @@
+
+C:\Users\Hemant Patil\Downloads\Tutition_Project (2)\Tutition_Project\backend\api\voice_assistant_utils.py:5: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+SystemCheckError: System check identified some issues:
+
+ERRORS:
+<class 'api.admin.NotificationAdmin'>: (admin.E108) The value of 'list_display[1]' refers to 'student', which is not a callable or attribute of 'NotificationAdmin', or an attribute, method, or field on 'api.Notification'.
+<class 'api.admin.NotificationAdmin'>: (admin.E108) The value of 'list_display[2]' refers to 'is_read', which is not a callable or attribute of 'NotificationAdmin', or an attribute, method, or field on 'api.Notification'.
+<class 'api.admin.NotificationAdmin'>: (admin.E116) The value of 'list_filter[0]' refers to 'student', which does not refer to a Field.
+<class 'api.admin.NotificationAdmin'>: (admin.E116) The value of 'list_filter[1]' refers to 'is_read', which does not refer to a Field.
+
+WARNINGS:
+api.EnrolledSubject: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the ApiConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+api.Notification: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the ApiConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+api.ParentProfile: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the ApiConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+api.Student: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the ApiConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+api.StudentPerformance: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the ApiConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+api.StudentProfile: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the ApiConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+api.TeacherProfile: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the ApiConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.
+api.UserProfile: (models.W042) Auto-created primary key used when not defining a primary key type, by default 'django.db.models.AutoField'.
+	HINT: Configure the DEFAULT_AUTO_FIELD setting or the ApiConfig.default_auto_field attribute to point to a subclass of AutoField, e.g. 'django.db.models.BigAutoField'.

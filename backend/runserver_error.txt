@@ -1,0 +1,388 @@
+﻿python : Watching for 
+file changes with 
+StatReloader
+At line:1 char:1
++ python manage.py 
+runserver 2>&1 | 
+Out-File 
+runserver_error.txt 
+-Encod ...
++ ~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
+    + CategoryInfo      
+        : NotSpecified  
+  : (Watching for fi.   
+ ..th StatReloader:S    
+tring) [], RemoteEx    
+ception
+    + FullyQualifiedErr 
+   orId : NativeComman  
+  dError
+ 
+Exception in thread 
+django-main-thread:
+Traceback (most recent 
+call last):
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\site-packages\django\c
+ore\checks\urls.py", 
+line 136, in check_custo
+m_error_handlers
+    handler = resolver.r
+esolve_error_handler(sta
+tus_code)
+              ^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\site-packages\django\u
+rls\resolvers.py", line 
+732, in 
+resolve_error_handler
+    callback = getattr(s
+elf.urlconf_module, 
+"handler%s" % 
+view_type, None)
+                       
+^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\site-packages\django\u
+tils\functional.py", 
+line 47, in __get__
+    res = instance.__dic
+t__[self.name] = 
+self.func(instance)
+                        
+                 
+^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\site-packages\django\u
+rls\resolvers.py", line 
+711, in urlconf_module
+    return import_module
+(self.urlconf_name)
+           ^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\importlib\__init__.py"
+, line 126, in 
+import_module
+    return _bootstrap._g
+cd_import(name[level:], 
+package, level)
+           ^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
+  File "<frozen 
+importlib._bootstrap>", 
+line 1204, in 
+_gcd_import
+  File "<frozen 
+importlib._bootstrap>", 
+line 1176, in 
+_find_and_load
+  File "<frozen 
+importlib._bootstrap>", 
+line 1147, in 
+_find_and_load_unlocked
+  File "<frozen 
+importlib._bootstrap>", 
+line 690, in 
+_load_unlocked
+  File "<frozen importli
+b._bootstrap_external>",
+ line 940, in 
+exec_module
+  File "<frozen 
+importlib._bootstrap>", 
+line 241, in _call_with_
+frames_removed
+  File "C:\Users\Hemant 
+Patil\Downloads\Tutition
+_Project (2)\Tutition_Pr
+oject\backend\student_an
+alysis\urls.py", line 
+8, in <module>
+    path('api/', 
+include('api.urls')),
+                 
+^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\site-packages\django\u
+rls\conf.py", line 39, 
+in include
+    urlconf_module = imp
+ort_module(urlconf_modul
+e)
+                     ^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
+^^
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\importlib\__init__.py"
+, line 126, in 
+import_module
+    return _bootstrap._g
+cd_import(name[level:], 
+package, level)
+           ^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
+  File "<frozen 
+importlib._bootstrap>", 
+line 1204, in 
+_gcd_import
+  File "<frozen 
+importlib._bootstrap>", 
+line 1176, in 
+_find_and_load
+  File "<frozen 
+importlib._bootstrap>", 
+line 1147, in 
+_find_and_load_unlocked
+  File "<frozen 
+importlib._bootstrap>", 
+line 690, in 
+_load_unlocked
+  File "<frozen importli
+b._bootstrap_external>",
+ line 940, in 
+exec_module
+  File "<frozen 
+importlib._bootstrap>", 
+line 241, in _call_with_
+frames_removed
+  File "C:\Users\Hemant 
+Patil\Downloads\Tutition
+_Project (2)\Tutition_Pr
+oject\backend\api\urls.p
+y", line 2, in <module>
+    from . import 
+views, auth_views, 
+admin_views
+  File "C:\Users\Hemant 
+Patil\Downloads\Tutition
+_Project (2)\Tutition_Pr
+oject\backend\api\views.
+py", line 8, in <module>
+    import joblib
+ModuleNotFoundError: No 
+module named 'joblib'
+
+During handling of the 
+above exception, 
+another exception 
+occurred:
+
+Traceback (most recent 
+call last):
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\threading.py", line 
+1045, in 
+_bootstrap_inner
+    self.run()
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\threading.py", line 
+982, in run
+    self._target(*self._
+args, **self._kwargs)
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\site-packages\django\u
+tils\autoreload.py", 
+line 64, in wrapper
+    fn(*args, **kwargs)
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\site-packages\django\c
+ore\management\commands\
+runserver.py", line 
+134, in inner_run
+    self.check(**check_k
+wargs)
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\site-packages\django\c
+ore\management\base.py",
+ line 492, in check
+    all_issues = 
+checks.run_checks(
+                 
+^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\site-packages\django\c
+ore\checks\registry.py",
+ line 89, in run_checks
+    new_errors = check(a
+pp_configs=app_configs, 
+databases=databases)
+                 ^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\site-packages\django\c
+ore\checks\urls.py", 
+line 138, in check_custo
+m_error_handlers
+    path = getattr(resol
+ver.urlconf_module, 
+"handler%s" % 
+status_code)
+                   
+^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\site-packages\django\u
+tils\functional.py", 
+line 47, in __get__
+    res = instance.__dic
+t__[self.name] = 
+self.func(instance)
+                        
+                 
+^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\site-packages\django\u
+rls\resolvers.py", line 
+711, in urlconf_module
+    return import_module
+(self.urlconf_name)
+           ^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\importlib\__init__.py"
+, line 126, in 
+import_module
+    return _bootstrap._g
+cd_import(name[level:], 
+package, level)
+           ^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
+  File "<frozen 
+importlib._bootstrap>", 
+line 1204, in 
+_gcd_import
+  File "<frozen 
+importlib._bootstrap>", 
+line 1176, in 
+_find_and_load
+  File "<frozen 
+importlib._bootstrap>", 
+line 1147, in 
+_find_and_load_unlocked
+  File "<frozen 
+importlib._bootstrap>", 
+line 690, in 
+_load_unlocked
+  File "<frozen importli
+b._bootstrap_external>",
+ line 940, in 
+exec_module
+  File "<frozen 
+importlib._bootstrap>", 
+line 241, in _call_with_
+frames_removed
+  File "C:\Users\Hemant 
+Patil\Downloads\Tutition
+_Project (2)\Tutition_Pr
+oject\backend\student_an
+alysis\urls.py", line 
+8, in <module>
+    path('api/', 
+include('api.urls')),
+                 
+^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\site-packages\django\u
+rls\conf.py", line 39, 
+in include
+    urlconf_module = imp
+ort_module(urlconf_modul
+e)
+                     ^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
+^^
+  File "C:\Users\Hemant 
+Patil\AppData\Local\Prog
+rams\Python\Python311\Li
+b\importlib\__init__.py"
+, line 126, in 
+import_module
+    return _bootstrap._g
+cd_import(name[level:], 
+package, level)
+           ^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
+  File "<frozen 
+importlib._bootstrap>", 
+line 1204, in 
+_gcd_import
+  File "<frozen 
+importlib._bootstrap>", 
+line 1176, in 
+_find_and_load
+  File "<frozen 
+importlib._bootstrap>", 
+line 1147, in 
+_find_and_load_unlocked
+  File "<frozen 
+importlib._bootstrap>", 
+line 690, in 
+_load_unlocked
+  File "<frozen importli
+b._bootstrap_external>",
+ line 940, in 
+exec_module
+  File "<frozen 
+importlib._bootstrap>", 
+line 241, in _call_with_
+frames_removed
+  File "C:\Users\Hemant 
+Patil\Downloads\Tutition
+_Project (2)\Tutition_Pr
+oject\backend\api\urls.p
+y", line 2, in <module>
+    from . import 
+views, auth_views, 
+admin_views
+  File "C:\Users\Hemant 
+Patil\Downloads\Tutition
+_Project (2)\Tutition_Pr
+oject\backend\api\views.
+py", line 8, in <module>
+    import joblib
+ModuleNotFoundError: No 
+module named 'joblib'

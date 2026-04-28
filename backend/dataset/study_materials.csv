@@ -1,0 +1,14 @@
+material_id,title,subject,type,description,file_url,date
+1,Algebra Basics,Mathematics,PDF,Fundamental concepts of Algebra,materials/math_algebra.pdf,2026-03-18
+2,Introduction to Physics,Science,Video,Basics of Motion and Force,materials/physics_intro.mp4,2026-03-18
+3,World War II Summary,History,PDF,Key events and dates of WWII,materials/history_ww2.pdf,2026-03-18
+4,Grammar Essentials,English,PDF,Improve your writing skills,materials/english_grammar.pdf,2026-03-18
+5,Python for Beginners,Computer Science,Video,Start coding with Python,materials/cs_python.mp4,2026-03-18
+6,Chemistry: Periodic Table,Science,PDF,Learn about elements and weights,materials/science_chemistry.pdf,2026-03-18
+7,Calculus I,Mathematics,Video,Differentiation and Integration,materials/math_calculus.mp4,2026-03-18
+8,English Literature: Shakespeare,English,PDF,Analysis of major plays,materials/english_shakes.pdf,2026-03-18
+9,Modern Architecture,History,PDF,Evolution of buildings,materials/history_arch.pdf,2026-03-18
+10,Data Structures & Algorithms,Computer Science,PDF,Core concepts for coding interviews,materials/cs_dsa.pdf,2026-03-18
+11,Geometric,English,Video,Resource material,materials/Screen_Recording_2026-02-12_165251.mp4,2026-03-18
+12,intro,Computer Science,Video,Resource material,materials/Screen_Recording_2026-02-12_165251.mp4,2026-03-18
+13,chemistry,Computer Science,Video,Live recorded lecture,materials/live_lecture_2026-03-19T08-59-06-251Z.webm,2026-03-19

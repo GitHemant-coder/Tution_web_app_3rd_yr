@@ -1,0 +1,4 @@
+.env
+__pycache__/
+*.pyc
+api/ml_model/model.pkl

@@ -1,0 +1,111 @@
+.dashboard-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  background-color: #e6f0ff;
+}
+
+.dashboard-title {
+  text-align: center;
+  font-size: 36px;
+  color: #003366;
+  margin-bottom: 40px;
+}
+
+/* Card styling */
+.card {
+  background-color: white;
+  border: 1px solid #99c2ff;
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  margin-top: 15px;
+  background-color: #3366ff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #254eda;
+}
+
+/* Smaller buttons for links */
+.btn-small {
+  display: inline-block;
+  padding: 8px 15px;
+  margin-top: 10px;
+  background-color: #3399ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.btn-small:hover {
+  background-color: #2673cc;
+}
+
+/* Form */
+.form input,
+.form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  border: 1px solid #99c2ff;
+  font-size: 16px;
+}
+
+.form textarea {
+  resize: none;
+  height: 80px;
+}
+
+/* Messages */
+.message {
+  text-align: center;
+  margin-top: 10px;
+  color: #003366;
+  font-weight: bold;
+}
+
+/* Materials list */
+.material-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.material-item {
+  border: 1px solid #99c2ff;
+  padding: 15px;
+  border-radius: 12px;
+  background-color: #f2f9ff;
+}
+
+/* Feedback list */
+.feedback-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.feedback-item {
+  border: 1px solid #99c2ff;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #e6f2ff;
+}
