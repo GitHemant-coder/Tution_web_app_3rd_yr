@@ -1,8 +1,9 @@
 from django.urls import path
-from . import views, auth_views, admin_views
+from . import views, auth_views, admin_views, quiz_views, assignment_views, academic_calendar_views
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -100,7 +101,7 @@ urlpatterns = [
     path('notifications/unread-count/', views.get_unread_count, name='notif-unread-count-slash'),
     path('notifications/unread-count', views.get_unread_count, name='notif-unread-count'),
     
-    # Assignments Routing
+    # Admin Assignments Routing (existing)
     path('admin/assignments/', admin_views.manage_assignments, name='admin-assignments-slash'),
     path('admin/assignments', admin_views.manage_assignments, name='admin-assignments'),
     path('admin/assignments/<int:assign_id>/', admin_views.delete_assignment, name='admin-assignments-del-slash'),
@@ -111,4 +112,35 @@ urlpatterns = [
     path('admin/payments', admin_views.manage_payments, name='admin-payments'),
     path('admin/payments/<int:payment_id>/', admin_views.update_payment, name='admin-payments-detail-slash'),
     path('admin/payments/<int:payment_id>', admin_views.update_payment, name='admin-payments-detail'),
+
+    # ── Quiz Feature ──────────────────────────────────────────────────────────
+    path('quizzes/', quiz_views.quiz_list_create, name='quiz-list-create'),
+    path('quizzes/available/', quiz_views.available_quizzes, name='quiz-available'),
+    path('quizzes/<int:quiz_id>/delete/', quiz_views.quiz_delete, name='quiz-delete'),
+    path('quizzes/<int:quiz_id>/results/', quiz_views.quiz_results, name='quiz-results'),
+    path('quizzes/<int:quiz_id>/start/', quiz_views.start_quiz, name='quiz-start'),
+    path('attempts/<int:attempt_id>/submit/', quiz_views.submit_quiz, name='quiz-submit'),
+    path('attempts/<int:attempt_id>/integrity-events/', quiz_views.log_integrity_event, name='integrity-log'),
+    path('attempts/<int:attempt_id>/integrity/', quiz_views.integrity_summary, name='integrity-summary'),
+
+    # ── Assignment Feature (NEW) ─────────────────────────────────────────────
+    # Teacher endpoints
+    path('assignments/', assignment_views.assignment_list_create, name='assignment-list-create'),
+    path('assignments/<int:assignment_id>/delete/', assignment_views.assignment_delete, name='assignment-delete'),
+    path('assignments/<int:assignment_id>/submissions/', assignment_views.assignment_submissions, name='assignment-submissions'),
+
+    # Student endpoints
+    path('assignments/student/', assignment_views.student_assignments, name='student-assignments'),
+    path('assignments/<int:assignment_id>/submit/', assignment_views.student_submit, name='assignment-submit'),
+
+    # File downloads
+    path('assignments/<int:assignment_id>/pdf/', assignment_views.download_assignment_pdf, name='assignment-pdf'),
+    path('submissions/<int:submission_id>/pdf/', assignment_views.download_submission_pdf, name='submission-pdf'),
+    
+        # ── Academic Calendar Feature ─────────────────────────────────────────
+    path('academic-calendar/', academic_calendar_views.calendar_list_create, name='calendar-list-create'),
+    path('academic-calendar/upcoming/', academic_calendar_views.upcoming_events, name='calendar-upcoming'),
+    path('academic-calendar/<int:calendar_id>/', academic_calendar_views.calendar_detail, name='calendar-detail'),
+    path('academic-calendar/<int:calendar_id>/events/', academic_calendar_views.calendar_events, name='calendar-events'),
+    path('academic-calendar/<int:calendar_id>/events/<int:event_id>/', academic_calendar_views.calendar_event_detail, name='calendar-event-detail'),
 ]

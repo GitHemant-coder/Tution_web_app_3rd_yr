@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState, useCallback } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { get } from "../api/api";
 import { showError } from "../utils/toast";
 import "../App.css";
 import NotificationList from "../components/shared/NotificationList";
@@ -9,9 +10,13 @@ import DynamicPerformanceInsights from "../components/DynamicPerformanceInsights
 import VoiceStudyAgent from "../components/VoiceStudyAgent";
 import WeakTopicDetector from "../components/WeakTopicDetector";
 import StudentPerformanceTracker from "../components/StudentPerformanceTracker";
+import StudentAssignments from "../components/StudentAssignments";
+import AcademicCalendarView from "../components/AcademicCalendarView";
 
 export default function StudentDashboard() {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [availableQuizzes, setAvailableQuizzes] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
   const [recentVideos, setRecentVideos] = useState([]);
   const [enrolledSubjects, setEnrolledSubjects] = useState([]);
@@ -20,11 +25,7 @@ export default function StudentDashboard() {
 
   const API_BASE = "http://localhost:8000/api";
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
-  const fetchData = React.useCallback(async () => {
+  const fetchData = useCallback(async () => {
     try {
       const userStr = localStorage.getItem("user");
       const currentUser = userStr
@@ -32,11 +33,9 @@ export default function StudentDashboard() {
         : { studentId: 1, name: "Student Hub" };
       setUser(currentUser);
 
-      // Fetch all materials to show recent videos
       try {
         const matsRes = await axios.get(`${API_BASE}/materials/`);
         const allMats = Array.isArray(matsRes.data) ? matsRes.data : [];
-        // Show latest 3 videos
         const videos = allMats
           .filter((m) => m.type === "Video")
           .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
@@ -46,9 +45,9 @@ export default function StudentDashboard() {
         console.warn("Materials fetch failed");
       }
 
-      // Separate recommendations to ensure others don't block
       const currentId =
         currentUser._id || currentUser.id || currentUser.studentId;
+
       try {
         const recsRes = await axios.get(
           `${API_BASE}/recommendations/${currentId}/?n=2`,
@@ -68,12 +67,23 @@ export default function StudentDashboard() {
       } catch (e) {
         console.warn("Dynamic data fetch failed", e);
       }
+
+      try {
+        const quizzesRes = await get("/quizzes/available/", true);
+        setAvailableQuizzes(Array.isArray(quizzesRes) ? quizzesRes : []);
+      } catch (e) {
+        console.warn("Quizzes fetch failed:", e);
+      }
     } catch (err) {
       console.error("Error fetching real-time data:", err);
     } finally {
       setLoading(false);
     }
   }, [API_BASE]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const handleOpenMaterial = (note) => {
     if (note.file_url) {
@@ -124,6 +134,157 @@ export default function StudentDashboard() {
           </p>
         </div>
       </header>
+
+      {/* ── Academic Calendar (read-only) ──────────────────────────────── */}
+      <section style={{ marginBottom: "40px" }}>
+        <AcademicCalendarView />
+      </section>
+
+      {/* ── Assignments Section ───────────────────────────────────────── */}
+      <section style={{ marginBottom: "40px" }}>
+        <StudentAssignments />
+      </section>
+
+      {/* Assigned Quizzes Section */}
+      <section style={{ marginBottom: "40px" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <h3
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+              margin: 0,
+            }}
+          >
+            <span style={{ fontSize: "1.8rem" }}>📝</span> Assigned Quizzes
+          </h3>
+          <span className="small" style={{ opacity: 0.7 }}>
+            {availableQuizzes.length} quiz
+            {availableQuizzes.length !== 1 ? "zes" : ""} available
+          </span>
+        </div>
+
+        {availableQuizzes.length === 0 ? (
+          <div
+            className="card card-modern"
+            style={{ padding: "30px", textAlign: "center", opacity: 0.7 }}
+          >
+            No quizzes assigned at the moment. Check back soon!
+          </div>
+        ) : (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gap: "20px",
+            }}
+          >
+            {availableQuizzes.map((q) => (
+              <div
+                key={q.id}
+                className="card card-modern hover-lift"
+                style={{
+                  padding: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  borderTop: q.already_attempted
+                    ? "3px solid #22c55e"
+                    : "3px solid var(--primary)",
+                }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    <span className="status-badge status-accent">
+                      {q.subject}
+                    </span>
+                    <span className="small" style={{ opacity: 0.7 }}>
+                      By {q.teacher_name}
+                    </span>
+                  </div>
+                  <h4 style={{ margin: "0 0 8px 0", fontSize: "1.15rem" }}>
+                    {q.title}
+                  </h4>
+                  {q.description && (
+                    <p
+                      className="small"
+                      style={{ opacity: 0.7, margin: "0 0 12px 0" }}
+                    >
+                      {q.description}
+                    </p>
+                  )}
+                  <div
+                    className="small"
+                    style={{ opacity: 0.8, marginBottom: "16px" }}
+                  >
+                    ⏱ <strong>{q.time_limit_minutes} mins</strong> &nbsp;|&nbsp;
+                    ❓{" "}
+                    <strong>
+                      {q.question_count} question
+                      {q.question_count !== 1 ? "s" : ""}
+                    </strong>
+                  </div>
+                </div>
+
+                <div>
+                  {q.already_attempted ? (
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        background: "rgba(34, 197, 94, 0.1)",
+                        padding: "10px 16px",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      <span
+                        className="small"
+                        style={{ color: "#22c55e", fontWeight: 700 }}
+                      >
+                        ✅ Score: {q.my_score} / {q.my_total}
+                      </span>
+                      <button
+                        className="btn btn-modern btn-outline-modern"
+                        style={{ padding: "6px 12px", fontSize: "0.8rem" }}
+                        onClick={() => navigate(`/quiz/${q.id}`)}
+                      >
+                        Retake
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      className="btn btn-modern btn-gradient"
+                      style={{
+                        width: "100%",
+                        padding: "10px",
+                        fontSize: "0.9rem",
+                      }}
+                      onClick={() => navigate(`/quiz/${q.id}`)}
+                    >
+                      🚀 Start Quiz
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
 
       {/* Recent Live Videos */}
       {recentVideos.length > 0 && (
@@ -202,7 +363,7 @@ export default function StudentDashboard() {
         </section>
       )}
 
-      {/* AI Recommendations - "Open" and Direct */}
+      {/* AI Recommendations */}
       {recommendations.length > 0 && (
         <section style={{ marginBottom: "40px" }}>
           <div
@@ -307,24 +468,20 @@ export default function StudentDashboard() {
         </Link>
       </div>
 
-      {/* Admin Official Performance Tracker */}
       <section style={{ marginBottom: "40px" }}>
         <StudentPerformanceTracker
           studentId={user?._id || user?.studentId || user?.id}
         />
       </section>
 
-      {/* Explainable AI Performance Insight Form */}
       <section style={{ marginBottom: "40px" }}>
         <DynamicPerformanceInsights />
       </section>
 
-      {/* AI Personalized Study Calendar Generator */}
       <section style={{ marginBottom: "40px" }}>
         <StudyCalendar studentId={user?.studentId} />
       </section>
 
-      {/* Weak Topic Detector */}
       <section style={{ marginBottom: "40px" }}>
         <WeakTopicDetector />
       </section>

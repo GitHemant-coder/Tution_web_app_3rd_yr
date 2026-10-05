@@ -5,25 +5,48 @@ function getToken() {
 }
 
 async function handleResponse(res) {
-  const contentType = res.headers.get("content-type");
-  if (contentType && contentType.includes("application/json")) {
-    const data = await res.json();
+  // 204 No Content (typical for DELETE) or 205 Reset Content — no body to parse
+  if (res.status === 204 || res.status === 205) {
     if (!res.ok) {
-      const error = new Error(data.msg || data.message || `API Error: ${res.status}`);
-      error.data = data;
+      const error = new Error(`Request failed with status ${res.status}`);
+      error.status = res.status;
       throw error;
     }
-    return data;
-  } else {
-    // If not JSON, it might be an error page (HTML)
-    const text = await res.text();
-    if (!res.ok) {
-      const error = new Error(`Server error (${res.status}): ${res.statusText}`);
-      error.details = text.substring(0, 100);
-      throw error;
-    }
-    return text;
+    return null;   // success, no body
   }
+
+  // Read the raw text ONCE (we can't call .json() and .text() both)
+  const raw = await res.text();
+
+  // Try to parse as JSON if it looks like JSON
+  let data;
+  const contentType = res.headers.get("content-type") || "";
+  const looksLikeJSON = contentType.includes("application/json") ||
+                        raw.trim().startsWith("{") ||
+                        raw.trim().startsWith("[");
+
+  if (raw && looksLikeJSON) {
+    try {
+      data = JSON.parse(raw);
+    } catch {
+      data = raw;   // fallback: keep raw text
+    }
+  } else {
+    data = raw;     // plain text or empty
+  }
+
+  if (!res.ok) {
+    const msg =
+      (data && typeof data === "object" && (data.msg || data.message)) ||
+      (typeof data === "string" && data.slice(0, 120)) ||
+      `API Error: ${res.status}`;
+    const error = new Error(msg);
+    error.status = res.status;
+    error.data = data;
+    throw error;
+  }
+
+  return data;
 }
 
 export async function post(path, body, auth = false) {

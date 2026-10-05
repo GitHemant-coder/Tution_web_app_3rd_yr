@@ -11,11 +11,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 import os
-from dotenv import load_dotenv
-load_dotenv()
 from pathlib import Path
 
-# Load dotenv if installed
+# Load dotenv if installed (optional dependency)
 try:
     from dotenv import load_dotenv
 except ImportError:
@@ -24,6 +22,7 @@ except ImportError:
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load .env file if python-dotenv is available
 if load_dotenv:
     load_dotenv(BASE_DIR / '.env')
 
@@ -35,7 +34,8 @@ if load_dotenv:
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-fallback-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# Reads DEBUG from .env — defaults to True for local development
+DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
 ALLOWED_HOSTS = ['*']
 APPEND_SLASH = True
@@ -135,11 +135,25 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files (Study Materials)
+# FIXED: use plain StaticFilesStorage for development.
+# Switch back to whitenoise's CompressedManifestStaticFilesStorage only
+# after running `python manage.py collectstatic` in production.
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+
+# ─── Media files ────────────────────────────────────────────────────────────
+# All uploaded files (study materials, assignment question papers, student
+# submission PDFs) are stored under backend/materials/ by default via the
+# `upload_to` paths in api/models.py:
+#   - materials are saved directly as materials/<filename>
+#   - assignments go to materials/assignments/<id>/<filename>
+#   - submissions go to materials/submissions/<assignment_id>/<student_id>/<filename>
+# Django serves these URLs automatically in development when DEBUG=True.
+
 MEDIA_URL = '/materials/'
 MEDIA_ROOT = BASE_DIR / 'materials'
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

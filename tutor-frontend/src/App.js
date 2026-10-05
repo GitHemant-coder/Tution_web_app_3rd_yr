@@ -1,22 +1,25 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Landing from './pages/Landing';
-import Login from './pages/Login';
-import './App.css';
-import Navbar from './components/Navbar';
-import StudentDashboard from './pages/StudentDashboard';
-import Notes from './pages/Notes';
-import Feedback from './pages/Feedback';
-import RequestTutor from './pages/RequestTutor';
-import Profile from './pages/Profile';
-import PerformanceAnalysis from './pages/PerformanceAnalysis';
-import PerformancePrediction from './pages/PerformancePrediction';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import TeacherDashboard from './pages/TeacherDashboard';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Landing from "./pages/Landing";
+import Login from "./pages/Login";
+import "./App.css";
+import Navbar from "./components/Navbar";
+import StudentDashboard from "./pages/StudentDashboard";
+import Notes from "./pages/Notes";
+import Feedback from "./pages/Feedback";
+import RequestTutor from "./pages/RequestTutor";
+import Profile from "./pages/Profile";
+import PerformanceAnalysis from "./pages/PerformanceAnalysis";
+import PerformancePrediction from "./pages/PerformancePrediction";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import TeacherDashboard from "./pages/TeacherDashboard";
 import ViewStudents from "./pages/ViewStudents";
-import ParentDashboard from './pages/ParentDashboard';
-import AdminDashboard from './pages/AdminDashboard';
+import ParentDashboard from "./pages/ParentDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
+import CreateQuiz from "./pages/CreateQuiz";
+import QuizAttempt from "./pages/QuizAttempt";
+import QuizIntegrityReport from "./pages/QuizIntegrityReport";
 
 function App() {
   return (
@@ -33,10 +36,15 @@ function App() {
         <Route path="/request-tutor" element={<RequestTutor />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
+        <Route path="/create-quiz" element={<CreateQuiz />} />
+        <Route path="/quiz/:quizId" element={<QuizAttempt />} />
+        <Route path="/quiz/:quizId/results" element={<QuizIntegrityReport />} />
         <Route path="/view-students" element={<ViewStudents />} />
         <Route path="/performance-analysis" element={<PerformanceAnalysis />} />
-        <Route path="/performance-prediction" element={<PerformancePrediction />} />
-
+        <Route
+          path="/performance-prediction"
+          element={<PerformancePrediction />}
+        />
       </Routes>
 
       {/* ✅ ToastContainer must be outside Routes */}

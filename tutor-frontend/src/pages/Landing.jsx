@@ -13,38 +13,11 @@ export default function Landing() {
   const [quote, setQuote] = useState({ text: 'Loading inspiring thought...', author: '' });
   const [isVisible, setIsVisible] = useState({});
 
-  useEffect(() => {
-    const fallbackQuotes = [
-      { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
-      { text: "Success is the sum of small efforts, repeated day in and day out.", author: "Robert Collier" },
-      { text: "Education is the most powerful weapon which you can use to change the world.", author: "Nelson Mandela" },
-      { text: "The expert in anything was once a beginner.", author: "Helen Hayes" },
-      { text: "There are no shortcuts to any place worth going.", author: "Beverly Sills" },
-      { text: "Don't let what you cannot do interfere with what you can do.", author: "John Wooden" },
-      { text: "Motivation is what gets you started. Habit is what keeps you going.", author: "Jim Ryun" },
-      { text: "Strive for progress, not perfection.", author: "Unknown" },
-      { text: "The roots of education are bitter, but the fruit is sweet.", author: "Aristotle" },
-      { text: "A person who never made a mistake never tried anything new.", author: "Albert Einstein" }
-    ];
-
-    fetch('https://api.quotable.io/quotes/random?tags=education|success|learning')
-      .then(res => {
-        if (!res.ok) throw new Error("API error");
-        return res.json();
-      })
-      .then(data => {
-        if (data && data.length > 0) {
-          setQuote({ text: data[0].content, author: data[0].author });
-        } else {
-          throw new Error("No quotes returned");
-        }
-      })
-      .catch(err => {
-        console.error("Error fetching student quote:", err);
-        const randomFallback = fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
-        setQuote(randomFallback);
-      });
-  }, []);
+ useEffect(() => {
+   setQuote(
+     "Education is the most powerful weapon you can use to change the world.",
+   );
+ }, []);
 
   // Scroll animation hook
   useEffect(() => {

@@ -622,3 +622,12 @@ def update_payment(request, payment_id):
         return Response({'msg': 'Payment updated successfully'})
     except Payment.DoesNotExist:
         return Response({'msg': 'Payment not found'}, status=404)
+
+
+def is_admin_user(user):
+    """Return True if user is admin (staff or role=='admin')."""
+    if not user:
+        return False
+    if user.is_staff or user.is_superuser:
+        return True
+    return get_role(user) == 'admin'
